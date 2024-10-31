@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+	
+<!--HOJA DE ESTILOS-->	
+<link href="estilos-preguntas-2.css" rel="stylesheet" type="text/css"/>
+	
+	
+<script>
+window.transitionToPage = function(href) {
+    document.querySelector('body').style.opacity = 0
+    setTimeout(function() { 
+        window.location.href = href
+    }, 500)
+}
+
+document.addEventListener('DOMContentLoaded', function(event) {
+    document.querySelector('body').style.opacity = 1
+})	
+</script>
+	
+	
+<!-- INICIO SCRIPT -->	
+<script src="libs/1.0.0/createjs.min.js"></script>
+<script src="plantilla_pregunta.js"></script>
+<script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("4244C960549D1E4B93C27A25D7FBDB05");
+	var lib=comp.getLibrary();
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+	var lib=comp.getLibrary();
+	loader.loadManifest(lib.properties.manifest);
+}
+function handleFileLoad(evt, comp) {
+	var images=comp.getImages();	
+	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
+}
+function handleComplete(evt,comp) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	var queue = evt.target;
+	var ssMetadata = lib.ssMetadata;
+	for(i=0; i<ssMetadata.length; i++) {
+		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+	}
+	exportRoot = new lib.plantilla_pregunta_1();
+	stage = new lib.Stage(canvas);	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.framerate = lib.properties.fps;
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	//Code to support hidpi screens and responsive scaling.
+	AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+</script>
+<!-- FIN SCRIPT -->	
+	
+</head>
+
+<body onload="init();" style="margin:0px;">
+	
+	<!-- INICIO CANVAS -->
+	<div id="animation_container" style="background-color:rgba(99, 33, 82, 1.00); width:1080px; height:1920px">
+		<canvas id="canvas" width="1080" height="1920" style="position: absolute; display: block; background-color:rgba(99, 33, 82, 1.00);"></canvas>
+		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:1080px; height:1920px; position: absolute; left: 0px; top: 0px; display: block;">
+		</div>
+	</div>
+	<!-- FIN DE CANVAS CANVAS -->
+	
+<div id="container">
+	
+	
+	
+	
+ <!--<video autoplay muted loop>
+        <source src="videos/video_fondo_inicio.mp4" type="video/mp4" />
+    </video>-->
+    <div class="caption">
+    
+	<!--<div id="blanco"><img src="images/blanco.png" width="100%" height="889" alt=""/></div>
+	<div id="logo"><img src="images/cemprotec.png" width="420" height="249" alt=""/></div>-->
+	
+	<div id="preguntas">
+	<div id="pregunta0"> <!--inicio de pregunta 0-->
+	<div id="preg">
+		<img src="images/cem-preg02.png" width="800" height="317" alt=""/>
+	</div>
+	
+	<div class="grow" id="menu">
+	  <div onClick="showImage1()">
+		  	<img id="press01" src="images/press.png" width="620" height="auto" alt="" onClick="showImage1()" class="pressbutton" />
+	  		<img id="opt01" src="images/cem-p2-opt01.png" width="620" height="auto" alt="" onClick="showImage1()" />
+      		<div id="check01" class="check01"><img src="images/check.png" width="100" height="98" alt="" /></div>
+	  </div>
+	  <div onClick="showImage2()">
+		  	<img id="press02" src="images/press.png" width="620" height="auto" alt="" onClick="showImage1()" class="pressbutton" />
+	  		<img id="opt02" src="images/cem-p2-opt02.png" width="620" height="auto" alt="" onClick="showImage2()" />
+			<div id="check02" class="check02"><img src="images/check.png" width="100" height="98" alt=""/></div>
+	  </div>
+	  <div onClick="showImage3()">
+		  	<img id="press03" src="images/press.png" width="620" height="auto" alt="" onClick="showImage1()" class="pressbutton" />
+	  		<img id="opt03" src="images/cem-p2-opt03.png" width="620" height="auto" alt="" onClick="showImage3()" />
+		  	<div id="check03" class="check03"><img src="images/check.png" width="100" height="98" alt=""/></div>
+	  </div>
+	  <!--<div onClick="showImage4()">
+		  	<img id="press04" src="images/press.png" width="620" height="auto" alt="" onClick="showImage1()" class="pressbutton" />
+	  		<img id="opt04" src="images/cem-p2-opt04.png" width="620" height="auto" alt="" onClick="showImage4()" />
+		  	<div id="check04" class="check04"><img src="images/check.png" width="100" height="98" alt=""/></div>
+	  </div>-->
+	</div>
+		
+	<form id="resultados" method="post" action="trivia-cemprotec-03.html" enctype="multipart/form-data">
+		<input id="respuestaID" name="respuestaID" type="text">
+	</form>
+	
+	
+	<!--<div id="escorrrecto">
+	  <img src="images/buen-trabajo.gif"  alt=""/>
+	</div>
+		
+	<div id="esincorrecto">
+	  <img src="images/vamos-por-la-siguiente.gif"  alt=""/>
+	</div>-->
+		
+	<div id="escorrrecto">
+	  <img src="images/buen-trabajo.png"  alt=""/>  
+	</div>
+		
+	<div id="esincorrecto">
+	  <img src="images/vamos-por-la-siguiente.png"  alt=""/>
+	</div>
+		
+	<!--<div id="explicacion">
+		<img src="images/respuesta-correcta-02.png" alt=""/>
+	</div>-->
+		
+	</div> <!--fin de pregunta 1-->
+	</div>	
+	
+		
+    </div>
+	
+	<div id="tiempo">Responde en... <span id="time">00:00</span></div>
+	
+	
+</div>
+	
+<audio id="audio" src="efecto.mp3"></audio>
+	
+<script>
+	var RespOPT1 = 1;
+	var RespOPT2 = 0;
+	var RespOPT3 = 0;
+	var RespOPT4 = 0;	
+</script>	
+
+<script src="script.js"></script>	
+	
+<audio id="musica" autoplay loop>
+  <source src="musica.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+	
+	
+<script>
+	document.getElementById('musica').play();
+</script>
+	
+
+	
+	
+</body>
+</html>

@@ -1,0 +1,182 @@
+body { 
+   opacity: 0;
+   transition: opacity .5s;
+	margin: 0px;
+	width: 1060px;
+	height: 1880px;
+	/*background-image: url("images/fondo-2.jpg");*/
+	background-position: center;
+	background-repeat: no-repeat;
+	animation: animatedBackground 40s linear infinite ;
+}
+
+	
+@keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+
+	
+		#container{
+			width: 1060px;
+			height: 1910px;
+			border: 1px solid #ACACAC;
+			margin-left: auto;
+			margin-right: auto;
+			position: relative;
+		}
+
+#respuestaID{
+	display: none;
+}
+		
+#container video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Just styling the content of the div, the *magic* in the previous rules */
+#container .caption {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  color: #dc0000;
+  padding: 10px;
+}
+		
+		
+		
+#logo{
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	margin-top: 320px;
+}
+		
+#menu{
+	position: absolute;
+	width: 620px;
+	/*left: 50%;*/
+	margin-left: 520px;
+    transform: translate(-50%, 0);
+	margin-top: 780px;
+}
+
+#menu img{
+	margin-bottom: 0px;
+	
+}	
+
+.grow img{
+	transition: 1s ease;
+}
+
+.grow img:hover{
+	-webkit-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	transform: scale(1.2);
+	transition: 1s ease;
+}
+
+	
+#blanco{
+	position: absolute;
+	margin-left: -12px;
+    margin-top: -12px;
+}		
+
+#preg{
+	position: absolute;
+	width: 800px;
+	left: 50%;
+    transform: translate(-50%, 0);
+	margin-top: 490px;
+	/*animation: fadeIn 1s ease-in both;
+	animation-delay: 0.2s;	*/
+}
+
+#opt01{
+	animation: fadeIn 1s ease-in both;
+	animation-delay: 0.5s;
+	margin-left: 90px;
+}
+#opt02{
+	animation: fadeIn 1s ease-in both;
+	animation-delay: 1s;
+	margin-left: 90px;
+}
+#opt03{
+	animation: fadeIn 1s ease-in both;
+	animation-delay: 1.5s;
+	margin-left: 90px;
+}	
+#opt04{
+	animation: fadeIn 1s ease-in both;
+	animation-delay: 2s;	
+}		
+	
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translate3d(0, -20%, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+.check01, .check02, .check03, .check04, .check05{
+	position: absolute;
+	z-index: 999999;
+	margin-top: -140px;
+	margin-left: 26px;
+	display: none;
+}
+
+#escorrrecto{
+	position: absolute;
+	z-index: 999999999;
+	width: 780px;
+	left: 50%;
+    transform: translate(-50%, 0);
+	margin-top: 760px;
+	display: none;
+}
+	
+#esincorrecto{
+	position: absolute;
+	z-index: 999999999;
+	width: 780px;
+	left: 50%;
+    transform: translate(-50%, 0);
+	margin-top: 760px;
+	display: none;
+}
+	
+#tiempo {
+    font-size: 40px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    margin-top: 22px;
+    z-index: 999999999999;
+    position: absolute;
+    color: #4f4f4f;
+    font-family: sans-serif;
+    background-color: #fff;
+    border-radius: 36px;
+    width: 480px;
+    padding: 18px;
+    margin: 0 auto;
+	 position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}

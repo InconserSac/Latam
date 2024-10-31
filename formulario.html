@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<!--
+	NOTES:
+	1. All tokens are represented by '$' sign in the template.
+	2. You can write your code only wherever mentioned.
+	3. All occurrences of existing tokens will be replaced by their appropriate values.
+	4. Blank lines will be removed automatically.
+	5. Remove unnecessary comments before creating your template.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="authoring-tool" content="Adobe_Animate_CC">
+<title>formulario</title>
+<!-- write your code here -->
+<style>
+  #animation_container {
+	position:absolute;
+	margin:auto;
+	left:0;right:0;
+  }
+	
+	body{
+		max-width: 1080px;
+		width: 1080px;
+		max-height: 1920px;
+	}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 38px;
+  padding: 12px 18px;
+  font-size: 28px;
+  line-height: 1.42857143;
+  color: #575757;
+  background-color: #fff;
+  background-image: none;
+  border: 2px solid #fcbf17;
+  border-radius: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  border-radius: 20px;
+}
+
+	label{
+		color:#fff;
+		font-size: 42px;
+	}
+	
+	.rowform{
+		margin-bottom: 40px;
+	}
+	
+	.grow {
+    position: absolute;
+    /* margin-left: 200px; */
+    margin-top: 420px;
+    width: 580px;
+    font-family: "Titillium Web",Helvetica,Arial,sans-serif;
+    text-align: center;
+    left: 50%;
+    margin-left: -340px;
+	}
+</style>
+<script src="libs/1.0.0/createjs.min.js"></script>
+<script src="formulario_fondo.js?1695095366133"></script>
+<script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("4244C960549D1E4B93C27A25D7FBDB05");
+	var lib=comp.getLibrary();
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+	var lib=comp.getLibrary();
+	loader.loadManifest(lib.properties.manifest);
+}
+function handleFileLoad(evt, comp) {
+	var images=comp.getImages();	
+	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
+}
+function handleComplete(evt,comp) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	var queue = evt.target;
+	var ssMetadata = lib.ssMetadata;
+	for(i=0; i<ssMetadata.length; i++) {
+		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+	}
+	exportRoot = new lib.formulario_fondo();
+	stage = new lib.Stage(canvas);	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.framerate = lib.properties.fps;
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	//Code to support hidpi screens and responsive scaling.
+	AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+</script>
+<!-- write your code here -->
+	
+	
+<link href="css/keyboard.css" rel="stylesheet">
+<link href="css/keyboard-dark.css" rel="stylesheet">	
+	
+<style>
+	.ui-keyboard {
+    bottom: 280px;
+}	
+</style>
+	
+</head>
+<body onload="init();" style="margin:0px;">
+	<div id="animation_container" style="background-color:rgba(255, 255, 255, 1.00); width:1080px; height:1920px">
+		<canvas id="canvas" width="1080" height="1920" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);"></canvas>
+		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:1080px; height:1920px; position: absolute; left: 0px; top: 0px; display: block;">
+		</div>
+	</div>
+	
+	<div class="grow" id="menu" style="display: none;">
+		
+		<!--<span><a href="cartas/index.html"><img id="boton8" src="images/boton-video.png" width="380" height="108" alt=""/></a></span>
+		<span><a href="fotos/index.html"><img id="boton9" src="images/boton-fotos.png" width="380" height="108" alt=""/></a></span>-->
+    	<!--<span><img id="boton3" src="images/boton-ajani.png" width="380" height="108" alt=""/></span>-->
+		<form id="idForm">
+		<div class="rowform">
+			<label for="nombre">Nombre Completo</label>
+			<input type="text" id="nombre" name="nombre" value="" class="casilla form-control" autocomplete="off"  />
+		</div>
+		
+		
+	<!--	<div class="rowform">
+			<label for="empresa">Veterinaria</label>
+			<input type="text" id="empresa" name="empresa" value="" class="casilla form-control" autocomplete="off" />
+		</div>-->
+		
+		<div class="rowform">
+			<label for="celular">DNI</label>
+			<input type="text" id="celular" name="celular" value="" class="casilla form-control" autocomplete="off"  />
+		</div>
+		
+		<!--<div class="rowform">
+			<label for="email">Correo</label>
+			<input type="text" id="email" name="email" value="" class="casilla form-control" autocomplete="off" />
+		</div>-->
+		
+		<span>
+			<img id="boton1" src="images/boton-enviar.png" width="620" height="auto" alt="" style="margin-top: 240px;" />
+		</span>
+		</form>
+	</div>
+	
+<script src="js/jquery-1.12.4.min.js"></script>
+<!--<script src="dist/jquery.flipster.min.js"></script>-->
+<script src="js/jquery.keyboard.js"></script>
+	
+	
+
+	
+	
+	
+	
+	
+	
+	<script>
+	
+	
+var random_number = "pregunta"+Math.floor(Math.random() * 4);
+	
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
+
+	
+//document.getElementById("boton1").addEventListener("click", function () {
+window.onload = function() {
+	
+	
+   /* var url = "enviar.php";
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $("#idForm").serialize(), 
+           success: function(data)
+           {
+              
+           }
+         });*/
+	
+	
+	/*SORTEO GRUPO I*/	
+var arr = ["trivia-cemprotec.html", "trivia-cemprotec-02.html", "trivia-cemprotec-03.html", "trivia-cemprotec-04.html", "trivia-cemprotec-05.html", "trivia-cemprotec-06.html", "trivia-cemprotec-07.html", "trivia-cemprotec-08.html", "trivia-cemprotec-09.html"];
+shuffle(arr);
+var pregunta1 = arr[0];
+var pregunta2 = arr[1];
+var pregunta3 = arr[2];
+var pregunta4 = arr[3];
+//var pregunta5 = arr[4];
+	
+sessionStorage.setItem("File1", pregunta1);
+sessionStorage.setItem("File2", pregunta2);
+sessionStorage.setItem("File3", pregunta3);
+sessionStorage.setItem("File4", pregunta4);
+//sessionStorage.setItem("File5", pregunta5);
+sessionStorage.setItem("PregNum", "1");
+sessionStorage.setItem("Puntaje", "0");
+	
+ location.href = "trivia/"+pregunta1;
+//location.href = pregunta1;
+};		
+</script>
+	
+<script>
+	
+	
+$(function() {
+
+    $('#nombre').keyboard({
+      usePreview: false,
+	  autoAccept : true,
+	  layout: 'custom',
+	  customLayout: {
+		'normal': [
+			'` 1 2 3 4 5 6 7 8 9 0 - = {del} {b}',
+			'q w e r t y u i o p [ ] \\',
+			'a s d f g h j k l ; \' ',
+			'{shift} z x c v b n m , . / {shift}',
+			'{space} {left} {right} {undo:Undo} {redo:Redo}'
+		],
+		'shift': [
+			'~ ! @ # $ % ^ & * ( ) _ + {del} {b}',
+			'Q W E R T Y U I O P { } |',
+			'A S D F G H J K L : " ',
+			'{shift} Z X C V B N M < > ? {shift}',
+			'{space} {left} {right} {undo:Undo} {redo:Redo}'
+		]
+	}
+    });
+	
+	 $('#empresa').keyboard({
+      usePreview: false,
+	  autoAccept : true,
+	  layout: 'custom',
+	  customLayout: {
+		'normal': [
+			'` 1 2 3 4 5 6 7 8 9 0 - = {del} {b}',
+			'q w e r t y u i o p [ ] \\',
+			'a s d f g h j k l ; \' ',
+			'{shift} z x c v b n m , . / {shift}',
+			'{space} {left} {right} {undo:Undo} {redo:Redo}'
+		],
+		'shift': [
+			'~ ! @ # $ % ^ & * ( ) _ + {del} {b}',
+			'Q W E R T Y U I O P { } |',
+			'A S D F G H J K L : " ',
+			'{shift} Z X C V B N M < > ? {shift}',
+			'{space} {left} {right} {undo:Undo} {redo:Redo}'
+		]
+	}
+    });
+	
+	$('#ruc').keyboard({
+	  layout : 'num',
+      usePreview: false,
+	  autoAccept : true
+    });
+	
+	$('#celular').keyboard({
+	  layout : 'num',
+      usePreview: false,
+	  autoAccept : true
+    });
+	
+	
+	
+	$('#email').keyboard({
+
+	
+		
+	display: {
+		'bksp'   : '\u2190',
+		'enter'  : 'return',
+		'normal' : 'ABC',
+		'meta1'  : '.?123',
+		'meta2'  : '#+=',
+		'accept' : '\u21d3'
+	},
+
+	layout: 'custom',
+	usePreview: false,
+	autoAccept : true,
+		
+	customLayout: {
+		'normal': [
+			'q w e r t y u i o p {bksp}',
+			'a s d f g h j k l {enter}',
+			'{s} z x c v b n m @ . {s}',
+			'{meta1} {space} _ -'
+		],
+		'shift': [
+			'Q W E R T Y U I O P {bksp}',
+			'A S D F G H J K L {enter}',
+			'{s} Z X C V B N M @ . {s}',
+			'{meta1} {space} _ -'
+		],
+		'meta1': [
+			'1 2 3 4 5 6 7 8 9 0 {bksp}',
+			'` | { } % ^ * / \' {enter}',
+			'{meta2} $ & ~ # = + . {meta2}',
+			'{normal} {space} ! ?'
+		],
+		'meta2': [
+			'[ ] { } \u2039 \u203a ^ * " , {bksp}',
+			'\\ | / < > $ \u00a3 \u00a5 \u2022 {enter}',
+			'{meta1} \u20ac & ~ # = + . {meta1}',
+			'{normal} {space} ! ?'
+		]
+	}
+
+})
+	
+	
+    // activate the typing extension
+    .addTyping({
+      showTyping: true,
+      delay: 250
+    });
+	
+	
+	
+	
+
+});
+	
+</script>	
+		
+</body>
+</html>

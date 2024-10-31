@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Memory Game</title>
+
+  <link rel="stylesheet" href="./styles.css">
+	
+					<script src="js/jquery-3.4.1.min.js"></script>
+                    <script type="text/javascript" src="js/jquery.countdownTimer.js"></script>
+                    <script src="js/jquery.flip.min.js"></script>
+                    <script src="js/jquery.popupoverlay.js"></script>
+					<link rel="stylesheet" type="text/css" href="css/jquery.countdownTimer.css" />
+
+	
+	<style>
+    img {
+        max-width: 100%;
+    }
+	#popups{
+		display:none;
+	}
+	#JPO, #GANASTE, #PERDISTE{
+		/*background: #EFEFEF;*/
+		background: url(images/blanco.png);
+		width: 550px;
+		height: 380px;	
+		-webkit-border-radius: 15px;
+		-moz-border-radius: 15px;
+		border-radius: 15px;
+	}
+		
+	#JPO{
+		/*background: #EFEFEF;*/
+		background: url(images/bien.gif);
+	}
+		
+	#GANASTE{
+		/*background: #EFEFEF;*/
+		background: url("images/ganaste.gif");
+	}
+		
+	#PERDISTE{
+		/*background: #EFEFEF;*/
+		background: url(images/fondo-perdiste.png);
+	}
+		
+	.JPO_close{
+		margin-top: 260px;
+	}
+	
+	body{
+		background: url("images/fondo-memoria.jpg");
+		background-position: top center;
+		background-repeat: no-repeat;
+	}
+
+    </style>
+    
+    
+    
+	<script>
+    $(document).ready(function() {
+
+      // Initialize the plugin
+      $('#JPO').popup({
+		  	blur:false,
+		  	focuselement: 'closebutton',
+    		keepfocus: false
+    		/*background: false,
+    		closebutton: true*/
+	  });
+	  $('#GANASTE').popup({
+		  blur:false
+	  });
+		
+	  $('#PERDISTE').popup({
+		  blur:false
+	  });
+
+      // Set default `pagecontainer` for all popups (optional, but recommended for screen readers and iOS*)
+      $.fn.popup.defaults.pagecontainer = '#popups'
+    });
+  </script>
+	
+	
+	
+</head>
+<body>
+	<div id="popups">
+  <!--<div id="JPO">
+    <div style="text-align: center;">
+    </div>
+    <div style="text-align: center;">
+	    <img class="JPO_close" style="cursor: pointer;" src="images/continuar.png" alt=""/> 
+    </div>
+    </div>-->
+  
+  <div id="GANASTE">
+    <div style="text-align: center;">
+    	<img src="images/ganaste.png" alt=""/>
+    </div>
+    <!-- Add a button to close the popup (optional) -->
+    <!--<button class="JPO_close">Close</button>-->
+    <div style="text-align: center;">
+	    <img class="JPO_close" style="cursor: pointer;" src="images/continuar.png" onclick="javascript:location.href='../inicio.html'" alt=""/> 
+    </div>
+  </div>
+  
+  <div id="PERDISTE">
+    <div style="text-align: center;">
+    	<!--<img src="images/perdiste.png" alt=""/>-->
+    </div>
+    <!-- Add a button to close the popup (optional) -->
+    <!--<button class="JPO_close">Close</button>-->
+    <div style="text-align: center;">
+	    <img class="JPO_close" style="cursor: pointer;" src="images/continuar.png" onclick="javascript:location.href='../inicio.html'" alt=""/> 
+    </div>
+  </div>
+</div>
+	
+	
+	
+  <section class="memory-game" style="margin-top: 40px;">
+	  
+	  <div style="width: 100%; height: 100px; text-align: center; margin-bottom: 100px; margin-top: 40px;">
+    							<img src="images/titulo.png" alt=""/> 
+    </div>
+	  
+
+
+	
+	  						<div style="text-align: center; width: 100%; margin-bottom: 38px; margin-top: 150px;">
+    							<span id="seconds_timer"></span>
+                            </div>
+                            <script>
+								var audioperdiste = new Audio('sounds/_124996__phmiller42__awwwav.mp3');
+								
+                                $(function(){
+                                    $('#seconds_timer').countdowntimer({
+										seconds :50,
+										/*expiryUrl ''*/
+										timeUp : timeIsUp
+                                    });
+                                });
+								function timeIsUp() {
+        							$('#PERDISTE').popup('show');
+									audioperdiste.play();
+    							}								
+                            </script>
+	  
+	  
+	  
+    <div class="memory-card" data-name="react">
+      <img class="front-face" src="images/icon001.jpg" alt="React">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="react">
+      <img class="front-face" src="images/icon001.jpg" alt="React">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="angular">
+      <img class="front-face" src="images/icon002.jpg" alt="Angular">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="angular">
+      <img class="front-face" src="images/icon002.jpg" alt="Angular">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="ember">
+      <img class="front-face" src="images/icon003.jpg" alt="Ember">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="ember">
+      <img class="front-face" src="images/icon003.jpg" alt="Ember">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="vue">
+      <img class="front-face" src="images/icon004.jpg" alt="Vue">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="vue">
+      <img class="front-face" src="images/icon004.jpg" alt="Vue">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="backbone">
+      <img class="front-face" src="images/icon005.jpg" alt="Backbone">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="backbone">
+      <img class="front-face" src="images/icon005.jpg" alt="Backbone">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="aurelia">
+      <img class="front-face" src="images/icon006.jpg" alt="Aurelia">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="aurelia">
+      <img class="front-face" src="images/icon006.jpg" alt="Aurelia">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+	
+	 <!---->
+	  
+	  <div class="memory-card" data-name="elant">
+      <img class="front-face" src="images/icon007.jpg" alt="elant">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="elant">
+      <img class="front-face" src="images/icon007.jpg" alt="elant">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+	  
+	  
+	   <!---->
+	  
+	  <div class="memory-card" data-name="grupolar">
+      <img class="front-face" src="images/icon008.jpg" alt="grupolar">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+
+    <div class="memory-card" data-name="grupolar">
+      <img class="front-face" src="images/icon008.jpg" alt="grupolar">
+      <img class="back-face" src="images/icon000.jpg" alt="Memory Card">
+    </div>
+	  
+	  	 
+	  
+  </section>
+
+	
+<div style="width: 100%; height: 100px; text-align: center; float: left; position: absolute; margin-top: 1500px;">
+    							<a href="../inicio.html"><img src="images/iniciar.png" alt=""/> </a>
+</div> 
+	
+	
+  <script src="./scripts.js"></script>
+	
+	
+</body>
+</html>
