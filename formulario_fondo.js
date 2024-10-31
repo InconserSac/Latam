@@ -386,7 +386,7 @@ if (reversed == null) { reversed = false; }
 		
 		function playGoToInicio() {	
 		  //this.parent.gotoAndPlay("inicio");
-		  window.open("inicio.html", "_self");
+		  window.open("index.html", "_self");
 		}
 		
 		this.stop();
